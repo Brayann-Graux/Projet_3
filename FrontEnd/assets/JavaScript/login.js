@@ -1,21 +1,41 @@
 // Récupération des éléments du formulaire de login
-const email = document.getElementById("email")
-const password = document.getElementById("password")
+
 const seConnecter = document.getElementById("seConnecter")
 
 
 seConnecter.addEventListener("click", login)
 // Stockage des données utilisateur lors du login
 async function login(event) {
-    event.preventDefault()
-    const valeurEmail = email.value
-    const valeurPassword = password.value
+    //event.preventDefault() 
+    const email = document.getElementById("email")
+    const password = document.getElementById("password")
+
+if(!email.value){
+    alert ("Merci de saisir un email")
+    return
+}else{
+     // regex pour savoir si c'est bien un mail qui a été mis
+    
+    const regex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+    if(!regex.test(email.value)){
+        alert ("Merci de saisir un email valide")
+        return 
+    }
+}
+
+if(!password.value){
+    alert ("Merci de saisir un mot de passe")
+    return
+}
+
+
+
 
     try {
         const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ email: valeurEmail, password: valeurPassword })
+            body: JSON.stringify({ email: email.value, password: password.value })
         });
         const data = await response.json();
 

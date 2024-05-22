@@ -1,3 +1,6 @@
+// Appel de la fonction pour afficher les travaux avec les filtres par catégorie
+afficherTravaux();
+
 // Récupération des catégories et travaux avec l'API
 async function fetchTravauxEtCategories() {
     const reponseTravaux = await fetch("http://localhost:5678/api/works");
@@ -39,6 +42,7 @@ async function afficherTravaux() {
         const boutonCat = document.createElement("button");
         boutonCat.textContent = cat.name;
         boutonCat.id = "bouton-" + cat.id;
+        boutonCat.dataset.categoryId=cat.id
         boutonCat.name = cat.id;
         // Ajout du gestionnaire d'événements pour afficher les travaux de la catégorie sélectionnée
         boutonCat.addEventListener('click', () => {
@@ -76,8 +80,7 @@ function afficherTravauxParCategorie(travaux) {
     });
 }
 
-// Appel de la fonction pour afficher les travaux avec les filtres par catégorie
-afficherTravaux();
+
 
 
 // Message d'erreur connexion
