@@ -10,9 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
         rel="stylesheet">
     <meta name="description" content="">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-index-admin.css">
     <script src="../javascript/index.js" defer></script>
     <script src="../javascript/logout.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </head>
 
 <body>
@@ -43,11 +44,40 @@
                     décorateur(trice)</p>
             </article>
         </section>
+
         <section id="portfolio">
             <h2>Mes Projets</h2>
+            <div id="openModalBtn" class="icon-text">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Modifier</span>
+            </div>
+        
+            <!-- Fenêtre modale -->
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>Galerie photo</h2>
+                    <div id="gallery-modale" class="gallery-modale">
+                        <img src="../images/abajour-tahina.png">
+                        <img src="../images/appartement-paris-v.png">
+                        <img src="../images/appartement-paris-x.png">
+                        <img src="../images/appartement-paris-xviii.png">
+                        <img src="../images/bar-lullaby-paris.png">
+                        <img src="../images/hotel-first-arte-new-delhi.png">
+                        <img src="../images/la-balisiere.png">
+                        <img src="../images/le-coteau-cassis.png">
+                        <img src="../images/restaurant-sushisen-londres.png">
+                        <img src="../images/structures-thermopolis.png">
+                        <img src="../images/villa-ferneze.png">                        
+                    </div>                    
+                </div>
+            </div>
+        </section>
+
+            <script src="../JavaScript/index.js"></script>
             <!-- Filtres de catégorie -->
             <!-- Récupération des travaux depuis l'API -->
-        </section>
+        
         <section id="contact">
             <h2>Contact</h2>
             <p>Vous avez un projet ? Discutons-en !</p>
