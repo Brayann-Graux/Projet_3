@@ -1,5 +1,4 @@
-// Appel de la fonction pour afficher les travaux avec les filtres par catégorie
-afficherTravaux();
+
 
 // Récupération des catégories et travaux avec l'API
 async function fetchTravauxEtCategories() {
@@ -13,7 +12,7 @@ async function fetchTravauxEtCategories() {
 
 
 // Afficher dynamiquement les travaux avec la possibilité de filtrer par catégorie
-async function afficherTravaux() {
+export async function afficherTravaux() {
     try {
     const { travaux, categories } = await fetchTravauxEtCategories();
 
@@ -25,31 +24,34 @@ async function afficherTravaux() {
     // Création des boutons de filtre par catégorie
     const filtres = document.createElement('div');
     filtres.classList.add('filtres');
+    filtres.id = "filtres-categories";
 
     // Création du bouton "Tous" pour afficher toutes les catégories
     const tous = document.createElement("button");
     tous.textContent = "Tous";
     tous.id = "bouton-tous";
+    tous.classList = "btnTous"
     tous.name = "Tous";
     // Ajout du gestionnaire d'événements pour afficher tous les travaux
     tous.addEventListener('click', () => {
         afficherTravauxParCategorie(travaux);
     });
-    filtres.appendChild(tous);
+    filtresCategories.appendChild(tous);
 
     // Création des boutons pour chaque catégorie
     categories.forEach(cat => {
         const boutonCat = document.createElement("button");
         boutonCat.textContent = cat.name;
         boutonCat.id = "bouton-" + cat.id;
-        boutonCat.dataset.categoryId=cat.id
+        boutonCat.classList = "btnCat"
         boutonCat.name = cat.id;
         // Ajout du gestionnaire d'événements pour afficher les travaux de la catégorie sélectionnée
         boutonCat.addEventListener('click', () => {
             const travauxFiltres = travaux.filter(travail => travail.category.id === cat.id);
             afficherTravauxParCategorie(travauxFiltres);
         });
-        filtres.appendChild(boutonCat);
+        const filtresCategories = document.getElementById("filtres-categories")
+        filtresCategories.appendChild(boutonCat);
     });
 
 
@@ -80,12 +82,13 @@ function afficherTravauxParCategorie(travaux) {
     });
 }
 
-
+// Appel de la fonction pour afficher les travaux avec les filtres par catégorie
+afficherTravaux();
 
 
 // Message d'erreur connexion
 const portfolio = document.getElementById("portfolio")
-function afficherMessage(message) {
+export function afficherMessage(message) {
     const erreurPrecedente = document.querySelector(".message-erreur")
     if (erreurPrecedente) {
         erreurPrecedente.remove()

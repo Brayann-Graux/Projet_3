@@ -1,61 +1,37 @@
 // Récupération des éléments du formulaire de login
-
+const email = document.getElementById("email")
+const password = document.getElementById("password")
 const seConnecter = document.getElementById("seConnecter")
 
 
 seConnecter.addEventListener("click", login)
 // Stockage des données utilisateur lors du login
 async function login(event) {
-    //event.preventDefault() 
-    const email = document.getElementById("email")
-    const password = document.getElementById("password")
-
-if(!email.value){
-    alert ("Merci de saisir un email")
-    return
-}else{
-     // regex pour savoir si c'est bien un mail qui a été mis
-    
-    const regex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-    if(!regex.test(email.value)){
-        alert ("Merci de saisir un email valide")
-        return 
-    }
-}
-
-if(!password.value){
-    alert ("Merci de saisir un mot de passe")
-    return
-}
-
-
-
+    event.preventDefault()
+    const valeurEmail = email.value
+    const valeurPassword = password.value
 
     try {
         const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ email: email.value, password: password.value })
+            body: JSON.stringify({ email: valeurEmail, password: valeurPassword })
         });
         const data = await response.json();
 
         if (data.token) {
             localStorage.setItem("token", data.token);
-            window.location.href = "../html/index-admin.html";
+            window.location.href = "../../index.html";
             console.log("Connexion réussie");
             console.log("Token trouvé :", localStorage.getItem("token"));
         } else {
-            afficherMessage("L'adresse mail ou le mot de passe est incorrect")
+            afficherMessage("Erreur dans l’identifiant ou le mot de passe")
         }
     } catch (error) {
         afficherMessage("Une erreur est survenue")
         console.error("Erreur lors de la connexion:", error);
     }
 }
-
-
-// AJOUTER LOGOUT AVEC SUPPRESSION TOKEN  CHANGER LOGIN EN LOGOUT MENU QUAND CO
-// LOGOUT QUAND STOP PAGE
 
 
 // Message d'erreur mail ou mdp
@@ -82,3 +58,6 @@ togglePassword.addEventListener('click', function () {
     togglePassword.classList.toggle('fa-eye-slash');
     togglePassword.classList.toggle('fa-eye');
 });
+
+
+
