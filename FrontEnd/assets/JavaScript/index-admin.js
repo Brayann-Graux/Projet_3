@@ -5,36 +5,6 @@ const login = document.querySelector(".login")
 const instagram = document.querySelector(".instagram")
 
 
-// Création bandeau d'édition
-let bandeauEditionHTML = ` 
-<div class="bandeauEdition" 
-    style="
-    text-align: center;
-    display:none;
-    align-content: center;
-    background-color: black;
-    color: white;
-    height: 60px;
-    width: 100%;
-    margin-top: 0px;
-    box-sizing: border-box;
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-"><i class="fa-solid fa-pen-to-square"></i> Mode édition</div>
-`;
-header.insertAdjacentHTML('beforebegin', bandeauEditionHTML);
-header.style.paddingTop = "calc(+50px)";
-
-// Création nav Logout
-let LogOutHTML = document.createElement("li");
-LogOutHTML.className = "LogOut";
-LogOutHTML.style.display = "none";
-LogOutHTML.textContent = "LogOut";
-instagram.parentNode.insertBefore(LogOutHTML, instagram)
-
-
 //Selection des éléments DOM
 const btnCat = document.querySelectorAll(".btnCat");
 const btnTous = document.getElementById("bouton-tous");
@@ -51,11 +21,12 @@ async function apparitionEdition() {
     console.log("Token vérifié:", verifConnection);
 
     if (verifConnection) {
+        createBandeau()
         openModalHTML.style.display = "block";
-        bandeauEdition.style.display = "block";
         boutonModifier.style.display = "block";
         filtresCategories.style.display = "none";
-        login.style.display = "none";
+        login.innerHTML="Logout";
+        login.addEventListener("click", logout)
         LogOut.style.display = "block";
         console.log("ok");
     } else {
@@ -63,6 +34,21 @@ async function apparitionEdition() {
     }
 }
 
+function createBandeau(){
+    let bandeauEditionHTML = ` 
+<div class="bandeauEdition admin-bandeau"><i class="fa-solid fa-pen-to-square"></i> Mode édition</div>
+`;
+header.insertAdjacentHTML('beforebegin', bandeauEditionHTML);
+header.classList.add("admin-main")
+}
+
 apparitionEdition()
 
-
+function logout(event){
+    event.preventDefault()
+    // Creation des fonctionnalités du bouton de logout
+ 
+            
+            localStorage.removeItem("token")
+            window.location.href = "index.html";
+}    

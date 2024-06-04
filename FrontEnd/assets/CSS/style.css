@@ -59,7 +59,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	/* margin: 50px 0 */
+	margin: 30px 0
 }
 
 section {
@@ -246,4 +246,22 @@ li.LogOut {
 	color: white;
 }
 
+.admin-bandeau{
+	text-align: center;
+    display:block;
+    align-content: center;
+    background-color: black;
+    color: white;
+    height: 60px;
+    width: 100%;
+    margin-top: 0px;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
 
+.admin-main {
+	padding-top: 100px;
+}
