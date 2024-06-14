@@ -268,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const ajoutPhotoButton = document.getElementById("ajoutPhoto");
     if (ajoutPhotoButton) {
         ajoutPhotoButton.addEventListener("click", openAjoutPhotoModal);
-        console.log("Écouteur d'événement ajouté à 'ajoutPhoto'");
     } else {
         console.error("L'élément avec l'ID 'ajoutPhoto' n'existe pas.");
     }

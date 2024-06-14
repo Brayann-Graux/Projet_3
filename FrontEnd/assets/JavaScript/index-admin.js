@@ -18,7 +18,6 @@ const filtresCategories = document.getElementById("filtres-categories");
 
 async function apparitionEdition() {
     const verifConnection = localStorage.getItem("token");
-    console.log("Token vérifié:", verifConnection);
 
     if (verifConnection) {
         createBandeau()
