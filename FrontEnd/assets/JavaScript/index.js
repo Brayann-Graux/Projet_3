@@ -1,4 +1,13 @@
+/*global fetch, console, document, localStorage */
 
+// =====================================================
+//     API Calls
+// =====================================================
+
+/**
+ * Récupération des catégories et travaux avec l'API.
+ * @returns {Object} Contient les travaux et les catégories.
+ */
 
 // Récupération des catégories et travaux avec l'API
 async function fetchTravauxEtCategories() {
@@ -10,6 +19,9 @@ async function fetchTravauxEtCategories() {
     return { travaux, categories };
 }
 
+// =====================================================
+//     Affichage des travaux
+// =====================================================
 
 // Afficher dynamiquement les travaux avec la possibilité de filtrer par catégorie
 export async function afficherTravaux() {
@@ -32,6 +44,7 @@ export async function afficherTravaux() {
     tous.id = "bouton-tous";
     tous.classList = "btnTous"
     tous.name = "Tous";
+    
     // Ajout du gestionnaire d'événements pour afficher tous les travaux
     tous.addEventListener('click', () => {
         afficherTravauxParCategorie(travaux);
@@ -86,17 +99,20 @@ function afficherTravauxParCategorie(travaux) {
 afficherTravaux();
 
 
-// Message d'erreur connexion
-const portfolio = document.getElementById("portfolio")
-export function afficherMessage(message) {
-    const erreurPrecedente = document.querySelector(".message-erreur")
+ /**
+     * Fonction pour afficher un message d'erreur
+     * @param {string} message - Le message d'erreur à afficher
+     */
+ function afficherMessage(message) {
+    const boutonValider = document.getElementById("envoyerProjet");
+    const erreurPrecedente = document.querySelector(".message-erreur");
     if (erreurPrecedente) {
-        erreurPrecedente.remove()
+        erreurPrecedente.remove();
     }
     const erreurMessage = document.createElement("p");
-    erreurMessage.classList.add("message-erreur")
+    erreurMessage.classList.add("message-erreur");
     erreurMessage.textContent = message;
     erreurMessage.style.color = "red";
     erreurMessage.style.marginBottom = "10px";
-    portfolio.appendChild(erreurMessage)
+    boutonValider.parentNode.insertBefore(erreurMessage, boutonValider);
 }

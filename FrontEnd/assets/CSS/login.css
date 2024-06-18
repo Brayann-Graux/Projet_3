@@ -36,6 +36,11 @@
     margin-top: -15px;
 }
 
+.message-erreur{
+    color: red;
+    margin-bottom: 10px;
+}
+
 #seConnecter:active {
     background-color: #145041;
     transform: scale(1.1);

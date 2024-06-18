@@ -11,6 +11,21 @@ async function login(event) {
     const valeurEmail = email.value
     const valeurPassword = password.value
 
+    if (!valeurEmail && !valeurPassword){
+        afficherMessage("Merci de renseigner votre email et votre mot de passe")
+        return
+    }
+
+    else if (!valeurEmail && valeurPassword){
+        afficherMessage("Merci de renseigner votre email")
+        return
+    }
+
+    else if (!valeurPassword && valeurEmail){
+        afficherMessage("Merci de renseigner votre mot de passe")
+        return
+    }
+
     try {
         const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
@@ -36,15 +51,15 @@ async function login(event) {
 
 // Message d'erreur mail ou mdp
 function afficherMessage(message) {
-    const erreurPrecedente = document.querySelector(".message-erreur")
-    if (erreurPrecedente) {
-        erreurPrecedente.remove()
-    }
+    // const erreurPrecedente = document.querySelector(".message-erreur")
+    //     erreurPrecedente?.remove()
+    
+
+    document.querySelector(".message-erreur")?.remove()
+    
     const erreurMessage = document.createElement("p");
     erreurMessage.classList.add("message-erreur")
     erreurMessage.textContent = message;
-    erreurMessage.style.color = "red";
-    erreurMessage.style.marginBottom = "10px";
     seConnecter.parentNode.insertBefore(erreurMessage, seConnecter);
 }
 

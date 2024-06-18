@@ -119,7 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fonction pour supprimer un travail
+    // =====================================================
+    //     Suppression des travaux
+    // =====================================================
+
+    /**
+     * Fonction pour supprimer un travail
+     * @param {number} id - L'ID du travail à supprimer
+     */
+
     async function supprimerTravail(id) {
         try {
             const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -282,8 +290,7 @@ async function validerProjet(event) {
 
     const formAjout = document.getElementById("formAjout");
     if (!formAjout) {
-        console.error("Le formulaire d'ajout n'a pas été trouvé.");
-        return;
+        return console.error("Le formulaire d'ajout n'a pas été trouvé.");
     }
 
     const title = document.getElementById("titre").value;
@@ -291,39 +298,38 @@ async function validerProjet(event) {
     const image = document.getElementById("image").files[0];
 
     if (!title || !categoryId || !image) {
-        console.error("Tous les champs du formulaire ne sont pas remplis.");
-        return;
+        return console.error("Tous les champs du formulaire ne sont pas remplis.");
     }
 
-    try {
-        const nouveauProjet = new FormData();
-        nouveauProjet.append("title", title);
-        nouveauProjet.append("image", image);
-        nouveauProjet.append("category", categoryId);
-        
+    const nouveauProjet = new FormData();
+    nouveauProjet.append("title", title);
+    nouveauProjet.append("image", image);
+    nouveauProjet.append("category", categoryId);
 
-        const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+    try {
         const response = await fetch('http://localhost:5678/api/works', {
             method: 'POST',
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
+            headers: { "Authorization": `Bearer ${token}` },
             body: nouveauProjet
         });
-        if (response.ok) {
-            const projetAjoute = await response.json();
-            afficherTravaux();
-            afficherTravauxModale();
-            closeAjoutPhotoModal(event);
-        } else {
+
+        if (!response.ok) {
             console.error("Erreur lors de l'ajout du projet:", response.status, response.statusText);
             const errorResponse = await response.json();
             console.error("Contenu de la réponse:", errorResponse);
-            afficherMessage("Erreur lors de l'ajout du projet.");
+            return afficherMessage("Erreur lors de l'ajout du projet.");
         }
+
+        await response.json();  // Si vous avez besoin de traiter la réponse
+        afficherTravaux();
+        afficherTravauxModale();
+        closeAjoutPhotoModal(event);
+
     } catch (error) {
         console.error("Erreur lors de la requête POST:", error);
         afficherMessage("Une erreur est survenue. Veuillez réessayer.");
     }
-};
+}
+
 });
