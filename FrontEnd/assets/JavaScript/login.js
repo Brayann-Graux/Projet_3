@@ -73,6 +73,3 @@ togglePassword.addEventListener('click', function () {
     togglePassword.classList.toggle('fa-eye-slash');
     togglePassword.classList.toggle('fa-eye');
 });
-
-
-

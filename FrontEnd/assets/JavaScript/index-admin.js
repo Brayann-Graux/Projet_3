@@ -26,8 +26,6 @@ async function apparitionEdition() {
         filtresCategories.style.display = "none";
         login.innerHTML="Logout";
         login.addEventListener("click", logout)
-        LogOut.style.display = "block";
-        console.log("ok");
     } else {
         console.log("Erreur !");
     }

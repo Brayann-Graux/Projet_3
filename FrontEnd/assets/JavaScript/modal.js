@@ -1,4 +1,4 @@
-import { afficherTravaux, afficherMessage } from "./index.js";
+import { afficherTravaux } from "./index.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem("token");
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour ouvrir la modale
     const target = document.querySelector(".js-open-modal");
     target.style.display = "none";
+    
     const openModal = function (e) {
         e.preventDefault();
 
@@ -122,11 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================
     //     Suppression des travaux
     // =====================================================
-
-    /**
-     * Fonction pour supprimer un travail
-     * @param {number} id - L'ID du travail à supprimer
-     */
 
     async function supprimerTravail(id) {
         try {
